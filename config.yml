@@ -1,0 +1,7 @@
+template: Hello, %s!
+defaultName: Stranger
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password: qwerty
+  url: jdbc:mysql://localhost/phonebook
