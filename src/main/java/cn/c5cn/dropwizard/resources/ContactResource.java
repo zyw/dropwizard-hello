@@ -7,6 +7,8 @@ import org.skife.jdbi.v2.DBI;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Created by ZYW on 2014/6/17.
@@ -28,15 +30,23 @@ public class ContactResource {
     }
 
     @POST
-    public Response createContact(Contact contact){
-        return Response.created(null).build();
+    public Response createContact(Contact contact) throws URISyntaxException {
+        int newContactId = contactDAO.createContact(contact.getFistName(),contact.getLastName(),contact.getPhone());
+        return Response.created(new URI(String.valueOf(newContactId))).build();
     }
 
-    @PUT
-    @Path("/{id}")
+    @POST
+    @Path("/{id}/update")
     public Response updateContact(@PathParam("id")int id,Contact contact){
+        contactDAO.updateContact(id,contact.getFistName(),contact.getLastName(),contact.getPhone());
         return Response.ok(new Contact(id,contact.getFistName(),
                 contact.getLastName(),contact.getPhone())).build();
     }
 
+    @GET
+    @Path("/{id}/delete")
+    public Response deleteContact(int id){
+        contactDAO.deleteContact(id);
+        return Response.noContent().build();
+    }
 }
