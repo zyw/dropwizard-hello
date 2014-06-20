@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="dropwizard-hello:war exploded">
+    <output-path>$PROJECT_DIR$/target/dddd</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="dropwizard-hello/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="dropwizard-hello" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dropwizard-hello:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="dddd.war">
+      <element id="artifact" artifact-name="dropwizard-hello:war exploded" />
+    </root>
+  </artifact>
+</component>
