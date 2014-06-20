@@ -1,12 +1,16 @@
 package cn.c5cn.dropwizard;
 
 import cn.c5cn.dropwizard.health.TemplateHealthCheck;
+import cn.c5cn.dropwizard.resources.ClientResource;
 import cn.c5cn.dropwizard.resources.ContactResource;
 import cn.c5cn.dropwizard.resources.HelloWorldResource;
+import com.sun.jersey.api.client.Client;
 import io.dropwizard.Application;
+import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.views.ViewBundle;
 import org.skife.jdbi.v2.DBI;
 
 /**
@@ -23,8 +27,8 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     @Override
-    public void initialize(Bootstrap<HelloWorldConfiguration> helloWorldConfigurationBootstrap) {
-
+    public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+        bootstrap.addBundle(new ViewBundle());
     }
 
     @Override
@@ -37,6 +41,10 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
         final ContactResource contactResource = new ContactResource(jdbi);
         environment.jersey().register(contactResource);
+
+        final Client client = new JerseyClientBuilder(environment).build("REST Client");
+
+        environment.jersey().register(new ClientResource(client));
 
         final TemplateHealthCheck healthCheck =
                 new TemplateHealthCheck(helloWorldConfiguration.getTemplate());

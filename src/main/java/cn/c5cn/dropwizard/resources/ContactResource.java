@@ -43,9 +43,9 @@ public class ContactResource {
                 contact.getLastName(),contact.getPhone())).build();
     }
 
-    @GET
+    @DELETE
     @Path("/{id}/delete")
-    public Response deleteContact(int id){
+    public Response deleteContact(@PathParam("id")int id){
         contactDAO.deleteContact(id);
         return Response.noContent().build();
     }
