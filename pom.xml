@@ -10,7 +10,6 @@
     <name>dropwizard-hello</name>
     <url>http://maven.apache.org</url>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dropwizard.version>0.7.0</dropwizard.version>
