@@ -2,6 +2,7 @@ package cn.c5cn.dropwizard.resources;
 
 import cn.c5cn.dropwizard.core.Contact;
 import cn.c5cn.dropwizard.dao.ContactDAO;
+import io.dropwizard.auth.Auth;
 import org.skife.jdbi.v2.DBI;
 
 import javax.ws.rs.*;
@@ -25,7 +26,7 @@ public class ContactResource {
 
     @GET
     @Path("/{id}")
-    public Response getContact(@PathParam("id")int id){
+    public Response getContact(@PathParam("id")int id,@Auth Boolean isAuthenticated){
         return Response.ok(contactDAO.getContactById(id)).build();
     }
 

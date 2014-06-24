@@ -3,24 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css">
 </head>
 <body>
-<table border="1">
+<table class="table table-bordered table-striped">
+    <colgroup>
+        <col class="col-xs-3">
+        <col class="col-xs-5">
+    </colgroup>
+    <thead>
     <tr>
-        <th colspan="2">Contact ({{contact.id}})</th>
+        <th>列</th>
+        <th>值</th>
     </tr>
+    </thead>
+    <tbody>
     <tr>
-        <td>First Name</td>
+        <td>
+            First Name
+        </td>
         <td>{{contact.fistName}}</td>
     </tr>
     <tr>
-        <td>Last Name</td>
+        <td>
+            Last Name
+        </td>
         <td>{{contact.lastName}}</td>
     </tr>
     <tr>
-        <td>Phone</td>
+        <td>
+            Phone
+        </td>
         <td>{{contact.phone}}</td>
     </tr>
+    </tbody>
 </table>
 </body>
 </html>

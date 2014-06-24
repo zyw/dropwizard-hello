@@ -6,6 +6,8 @@ import cn.c5cn.dropwizard.resources.ContactResource;
 import cn.c5cn.dropwizard.resources.HelloWorldResource;
 import com.sun.jersey.api.client.Client;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.auth.basic.BasicAuthProvider;
 import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
@@ -29,10 +31,14 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
         bootstrap.addBundle(new ViewBundle());
+        bootstrap.addBundle(new AssetsBundle());
     }
 
     @Override
     public void run(HelloWorldConfiguration helloWorldConfiguration, Environment environment) throws Exception {
+
+        environment.jersey().register(new BasicAuthProvider<Boolean>(new PhonebookAuthenticator(),"Web Service Realm"));
+
         final HelloWorldResource resource = new HelloWorldResource(helloWorldConfiguration.getTemplate(),helloWorldConfiguration.getDefaultName());
         environment.jersey().register(resource);
 
